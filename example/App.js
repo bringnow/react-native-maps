@@ -34,7 +34,7 @@ class App extends React.Component {
 
     this.state = {
       Component: null,
-      useGoogleMaps: true,
+      useGoogleMaps: false,
     };
   }
 
