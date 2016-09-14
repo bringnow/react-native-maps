@@ -12,5 +12,10 @@
 
 2. Make sure the `AirMapsExplorer` target is selected and click `Run`
 
-## TODO: android
+## android
 
+1. Start your emulator
+
+2. Install via gradle:
+
+     ./example/android/gradlew installDebug
