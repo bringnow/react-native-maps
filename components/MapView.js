@@ -14,7 +14,12 @@ import MapPolyline from './MapPolyline';
 import MapPolygon from './MapPolygon';
 import MapCircle from './MapCircle';
 import MapCallout from './MapCallout';
-import { contextTypes, airMapName } from './common';
+import {
+  contextTypes,
+  airMapName,
+  AIRGoogleMapIsInstalled,
+  createNotSupportedComponent,
+} from './common';
 
 const viewConfig = {
   uiViewClassName: 'AIR?Map',
@@ -30,7 +35,11 @@ const propTypes = {
    * Any value other than "google" will default to using
    * MapKit in iOS or GoogleMaps in android as the map provider.
    */
-  mapProvider: PropTypes.string,
+  mapProvider: PropTypes.oneOf([
+    null,
+    undefined,
+    'google',
+  ]),
 
   /**
    * Used to style and layout the `MapView`.  See `StyleSheet.js` and
@@ -477,7 +486,7 @@ class MapView extends React.Component {
       };
     }
 
-    const AIRMap = airMaps[airMapName(this.props.mapProvider)];
+    const AIRMap = airMapComponent(this.props.mapProvider);
 
     return (
       <AIRMap
@@ -492,22 +501,23 @@ MapView.propTypes = propTypes;
 MapView.viewConfig = viewConfig;
 MapView.childContextTypes = contextTypes;
 
+const nativeComponent = Component => requireNativeComponent(Component, MapView, {
+  nativeOnly: {
+    onChange: true,
+    onMapReady: true,
+    handlePanDrag: true,
+  },
+});
 const airMaps = {
-  AIRMap: requireNativeComponent('AIRMap', MapView, {
-    nativeOnly: {
-      onChange: true,
-      onMapReady: true,
-      handlePanDrag: true,
-    },
-  }),
-  AIRGoogleMap: requireNativeComponent('AIRGoogleMap', MapView, {
-    nativeOnly: {
-      onChange: true,
-      onMapReady: true,
-      handlePanDrag: true,
-    },
-  }),
+  default: nativeComponent('AIRMap'),
 };
+if (Platform.OS === 'android') {
+  airMaps.google = airMaps.default;
+} else {
+  airMaps.google = AIRGoogleMapIsInstalled ? nativeComponent('AIRGoogleMap') :
+    createNotSupportedComponent('react-native-maps: AirGoogleMaps dir must be added to your xCode project to support GoogleMaps on iOS.');
+}
+const airMapComponent = mapProvider => airMaps[mapProvider || 'default'];
 
 MapView.Marker = MapMarker;
 MapView.Polyline = MapPolyline;

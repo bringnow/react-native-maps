@@ -22,7 +22,9 @@ export const contextTypes = {
   mapProvider: PropTypes.string,
 };
 
-const createNotSupportedComponent = message => () => console.error(message) || null;
+export const createNotSupportedComponent = message => () => console.error(message) || null;
+
+export const AIRGoogleMapIsInstalled = !! NativeModules.UIManager[airMapName('google')];
 
 export function decorateMapComponent(Component, { componentType, providers }) {
   const components = {
@@ -37,7 +39,9 @@ export function decorateMapComponent(Component, { componentType, providers }) {
     } else if (platformSupport === USES_DEFAULT_IMPLEMENTATION) {
       components[mapProvider] = components.default;
     } else { // (platformSupport === SUPPORTED)
-      components[mapProvider] = requireNativeComponent(componentName, Component);
+      if (Platform.OS === 'android' || (Platform.OS === 'ios' && AIRGoogleMapIsInstalled)) {
+        components[mapProvider] = requireNativeComponent(componentName, Component);
+      }
     }
   });
 
