@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "react-native-maps"
+  s.name         = "react-native-google-maps"
   s.version      = "0.8.2"
   s.summary      = "React Native Mapview component for iOS + Android"
 
@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/AirMaps/**/*.{h,m}"
 
   s.dependency 'React'
+  s.dependency 'GoogleMaps', '2.0.1'
 end
