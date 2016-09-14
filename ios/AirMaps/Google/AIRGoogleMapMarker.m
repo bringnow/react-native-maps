@@ -186,4 +186,9 @@ CGRect unionRect(CGRect a, CGRect b) {
   return _realMarker.snippet;
 }
 
+- (void)setPinColor:(UIColor *)pinColor {
+  _pinColor = pinColor;
+  _realMarker.icon = [GMSMarker markerImageWithColor:pinColor];
+}
+
 @end

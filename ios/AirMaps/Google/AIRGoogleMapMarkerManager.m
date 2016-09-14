@@ -33,6 +33,7 @@ RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_REMAP_VIEW_PROPERTY(image, imageSrc, NSString)
 RCT_EXPORT_VIEW_PROPERTY(title, NSString)
 RCT_REMAP_VIEW_PROPERTY(description, subtitle, NSString)
+RCT_EXPORT_VIEW_PROPERTY(pinColor, UIColor)
 
 RCT_EXPORT_METHOD(showCallout:(nonnull NSNumber *)reactTag)
 {

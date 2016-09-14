@@ -23,6 +23,7 @@
 @property (nonatomic, copy) NSString *imageSrc;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
+@property (nonatomic, strong) UIColor *pinColor;
 
 - (void)showCalloutView;
 - (void)hideCalloutView;

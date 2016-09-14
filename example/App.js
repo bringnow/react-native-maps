@@ -108,6 +108,7 @@ class App extends React.Component {
         [MarkerTypes, 'Image Based Markers'],
         [Callouts, 'Custom Callouts'],
         [Overlays, 'Circles, Polygons, and Polylines (ios error)'],
+        [DefaultMarkers, 'Default Markers'],
       ]);
     }
 

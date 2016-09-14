@@ -118,6 +118,23 @@ id cameraPositionAsJSON(GMSCameraPosition *position) {
   return NO;
 }
 
+- (void)didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
+  if (!self.onPress) return;
+
+  CGPoint touchPoint = [self.projection pointForCoordinate:coordinate];
+
+  self.onPress(@{
+                @"coordinate": @{
+                    @"latitude": @(coordinate.latitude),
+                    @"longitude": @(coordinate.longitude),
+                    },
+                @"position": @{
+                    @"x": @(touchPoint.x),
+                    @"y": @(touchPoint.y),
+                    },
+                });
+}
+
 - (void)didChangeCameraPosition:(GMSCameraPosition *)position {
   id event = @{@"continuous": @YES,
                @"region": cameraPositionAsJSON(position),
