@@ -57,6 +57,7 @@ class CachedMap extends React.Component {
             >
               <Text>{region.name}</Text>
               <MapView
+                mapProvider={this.props.mapProvider}
                 style={{
                   width: mapSize,
                   height: mapSize,

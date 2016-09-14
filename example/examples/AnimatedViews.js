@@ -325,6 +325,7 @@ class AnimatedViews extends React.Component {
           onMoveShouldSetPanResponder={this.onMoveShouldSetPanResponder}
         >
           <MapView.Animated
+            mapProvider={this.props.mapProvider}
             style={styles.map}
             region={region}
             onRegionChange={this.onRegionChange}

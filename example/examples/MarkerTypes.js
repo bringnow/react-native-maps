@@ -5,6 +5,7 @@ import {
   Text,
   Dimensions,
 } from 'react-native';
+import MapView from 'react-native-maps';
 import flagBlueImg from './assets/flag-blue.png';
 import flagPinkImg from './assets/flag-pink.png';
 
@@ -27,10 +28,10 @@ class MarkerTypes extends React.Component {
   }
 
   render() {
-    const { MapView } = this.props;
     return (
       <View style={styles.container}>
         <MapView
+          mapProvider={this.props.mapProvider}
           style={styles.map}
           initialRegion={{
             latitude: LATITUDE,

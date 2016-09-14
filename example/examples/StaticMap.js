@@ -6,6 +6,7 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,8 +32,6 @@ class StaticMap extends React.Component {
   }
 
   render() {
-    const { MapView } = this.props;
-
     return (
       <View style={styles.container}>
         <ScrollView
@@ -48,6 +47,7 @@ class StaticMap extends React.Component {
           <Text>cause</Text>
           <Text>the</Text>
           <MapView
+            mapProvider={this.props.mapProvider}
             style={styles.map}
             scrollEnabled={false}
             zoomEnabled={false}

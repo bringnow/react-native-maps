@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import MapView from 'react-native-maps';
 import CustomCallout from './CustomCallout';
 
 const { width, height } = Dimensions.get('window');
@@ -60,11 +61,11 @@ class Callouts extends React.Component {
   }
 
   render() {
-    const { MapView } = this.props;
     const { region, markers } = this.state;
     return (
       <View style={styles.container}>
         <MapView
+          mapProvider={this.props.mapProvider}
           style={styles.map}
           initialRegion={region}
         >

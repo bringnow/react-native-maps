@@ -42,6 +42,7 @@ class AnimatedMarkers extends React.Component {
     return (
       <View style={styles.container}>
         <MapView
+          mapProvider={this.props.mapProvider}
           style={styles.map}
           initialRegion={{
             latitude: LATITUDE,

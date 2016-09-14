@@ -82,7 +82,7 @@ class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        {Component && <Component MapView={useGoogleMaps ? GoogleMapView : MapView} />}
+        {Component && <Component mapProvider={useGoogleMaps ? 'google' : null} />}
         {Component && this.renderBackButton()}
         {!Component &&
           <ScrollView
@@ -107,6 +107,7 @@ class App extends React.Component {
         [EventListener, 'Events (incomplete)'],
         [MarkerTypes, 'Image Based Markers'],
         [Callouts, 'Custom Callouts'],
+        [Overlays, 'Circles, Polygons, and Polylines (ios error)'],
       ]);
     }
 
