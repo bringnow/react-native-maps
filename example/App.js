@@ -110,6 +110,7 @@ class App extends React.Component {
         [Callouts, 'Custom Callouts'],
         [Overlays, 'Circles, Polygons, and Polylines (ios error)'],
         [DefaultMarkers, 'Default Markers'],
+        [TakeSnapshot, 'Take Snapshot (incomplete)'],
       ]);
     }
 

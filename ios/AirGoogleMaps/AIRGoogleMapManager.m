@@ -82,6 +82,42 @@ RCT_EXPORT_METHOD(fitToElements:(nonnull NSNumber *)reactTag
   }];
 }
 
+RCT_EXPORT_METHOD(takeSnapshot:(nonnull NSNumber *)reactTag
+                  withWidth:(nonnull NSNumber *)width
+                  withHeight:(nonnull NSNumber *)height
+                  withRegion:(MKCoordinateRegion)region
+                  withCallback:(RCTResponseSenderBlock)callback)
+{
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+    id view = viewRegistry[reactTag];
+    if (![view isKindOfClass:[AIRGoogleMap class]]) {
+      RCTLogError(@"Invalid view returned from registry, expecting AIRMap, got: %@", view);
+    } else {
+      AIRGoogleMap *mapView = (AIRGoogleMap *)view;
+
+      // TODO: currently we are ignoring width, height, region
+
+      UIGraphicsBeginImageContextWithOptions(mapView.frame.size, YES, 0.0f);
+      [mapView.layer renderInContext:UIGraphicsGetCurrentContext()];
+      UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+      UIGraphicsEndImageContext();
+
+      NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+      NSString *pathComponent = [NSString stringWithFormat:@"Documents/snapshot-%.20lf.png", timeStamp];
+      NSString *filePath = [NSHomeDirectory() stringByAppendingPathComponent: pathComponent];
+
+      NSData *data = UIImagePNGRepresentation(image);
+      [data writeToFile:filePath atomically:YES];
+      NSDictionary *snapshotData = @{
+                                     @"uri": filePath,
+                                     @"data": [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn]
+                                     };
+      callback(@[[NSNull null], snapshotData]);
+    }
+  }];
+}
+
+
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
   AIRGoogleMap *googleMapView = (AIRGoogleMap *)mapView;
   return [googleMapView didTapMarker:marker];
