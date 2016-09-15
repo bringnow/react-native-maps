@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
   StyleSheet,
   View,
@@ -75,6 +75,10 @@ class DefaultMarkers extends React.Component {
     );
   }
 }
+
+DefaultMarkers.propTypes = {
+  mapProvider: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -24,9 +24,6 @@ import LoadingMap from './examples/LoadingMap';
 import TakeSnapshot from './examples/TakeSnapshot';
 import FitToSuppliedMarkers from './examples/FitToSuppliedMarkers';
 import StaticMap from './examples/StaticMap';
-import MapView from 'react-native-maps';
-
-const { GoogleMapView } = MapView;
 
 class App extends React.Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
   StyleSheet,
   View,
@@ -73,7 +73,7 @@ class Callouts extends React.Component {
             ref={ref => { this.marker1 = ref; }}
             coordinate={markers[0].coordinate}
             title="This is a native view"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" // eslint-disable-line max-len
           />
           <MapView.Marker
             coordinate={markers[1].coordinate}
@@ -114,6 +114,10 @@ class Callouts extends React.Component {
     );
   }
 }
+
+Callouts.propTypes = {
+  mapProvider: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
   customView: {

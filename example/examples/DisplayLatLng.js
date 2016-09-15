@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
   StyleSheet,
   View,
@@ -87,6 +87,10 @@ class DisplayLatLng extends React.Component {
     );
   }
 }
+
+DisplayLatLng.propTypes = {
+  mapProvider: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
   container: {

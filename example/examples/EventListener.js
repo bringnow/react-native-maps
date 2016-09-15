@@ -40,7 +40,7 @@ Event.propTypes = {
 
 
 // eslint-disable-next-line react/no-multi-comp
-class DisplayLatLng extends React.Component {
+class EventListener extends React.Component {
   constructor(props) {
     super(props);
 
@@ -134,6 +134,10 @@ class DisplayLatLng extends React.Component {
   }
 }
 
+EventListener.propTypes = {
+  mapProvider: PropTypes.string,
+};
+
 const styles = StyleSheet.create({
   callout: {
     width: 60,
@@ -195,4 +199,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = DisplayLatLng;
+module.exports = EventListener;

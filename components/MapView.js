@@ -515,7 +515,7 @@ if (Platform.OS === 'android') {
   airMaps.google = airMaps.default;
 } else {
   airMaps.google = AIRGoogleMapIsInstalled ? nativeComponent('AIRGoogleMap') :
-    createNotSupportedComponent('react-native-maps: AirGoogleMaps dir must be added to your xCode project to support GoogleMaps on iOS.');
+    createNotSupportedComponent('react-native-maps: AirGoogleMaps dir must be added to your xCode project to support GoogleMaps on iOS.'); // eslint-disable-line max-len
 }
 const airMapComponent = mapProvider => airMaps[mapProvider || 'default'];
 

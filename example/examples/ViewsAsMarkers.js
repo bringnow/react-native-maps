@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
   StyleSheet,
   View,
@@ -17,7 +17,7 @@ const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-class DisplayLatLng extends React.Component {
+class ViewsAsMarkers extends React.Component {
   constructor(props) {
     super(props);
 
@@ -75,6 +75,10 @@ class DisplayLatLng extends React.Component {
   }
 }
 
+ViewsAsMarkers.propTypes = {
+  mapProvider: PropTypes.string,
+};
+
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
@@ -107,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = DisplayLatLng;
+module.exports = ViewsAsMarkers;

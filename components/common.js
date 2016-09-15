@@ -1,4 +1,6 @@
-import { React, PropTypes } from 'react';
+/* eslint-disable */
+
+import { PropTypes } from 'react';
 import {
   requireNativeComponent,
   NativeModules,
@@ -24,7 +26,7 @@ export const contextTypes = {
 
 export const createNotSupportedComponent = message => () => console.error(message) || null;
 
-export const AIRGoogleMapIsInstalled = !! NativeModules.UIManager[airMapName('google')];
+export const AIRGoogleMapIsInstalled = !!NativeModules.UIManager[airMapName('google')];
 
 export function decorateMapComponent(Component, { componentType, providers }) {
   const components = {
@@ -48,16 +50,16 @@ export function decorateMapComponent(Component, { componentType, providers }) {
   Component.contextTypes = contextTypes;
   Component.prototype.airComponent = function() {
     return components[this.context.mapProvider || 'default'];
-  }
+  };
 
   Component.prototype.uiManagerCommand = function(name) {
     return NativeModules.UIManager[airComponentName(this.context.mapProvider, componentType)]
       .Commands[name];
-  }
+  };
 
   Component.prototype.mapManagerCommand = function(name) {
     return NativeModules[`${airComponentName(this.context.mapProvider, componentType)}Manager`][name];
-  }
+  };
 
   return Component;
 }

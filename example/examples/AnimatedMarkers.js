@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
   StyleSheet,
   View,
@@ -67,6 +67,10 @@ class AnimatedMarkers extends React.Component {
     );
   }
 }
+
+AnimatedMarkers.propTypes = {
+  mapProvider: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
   container: {

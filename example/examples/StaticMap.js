@@ -16,7 +16,6 @@ const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-// eslint-disable-next-line react/no-multi-comp
 class StaticMap extends React.Component {
   constructor(props) {
     super(props);
@@ -95,6 +94,10 @@ class StaticMap extends React.Component {
     );
   }
 }
+
+StaticMap.propTypes = {
+  mapProvider: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
   container: {
