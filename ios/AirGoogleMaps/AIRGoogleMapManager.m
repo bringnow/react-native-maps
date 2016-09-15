@@ -55,6 +55,7 @@ RCT_EXPORT_VIEW_PROPERTY(rotateEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(scrollEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(pitchEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onMarkerPress, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onRegionChange, RCTDirectEventBlock)
@@ -89,6 +90,11 @@ RCT_EXPORT_METHOD(fitToElements:(nonnull NSNumber *)reactTag
 - (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
   AIRGoogleMap *googleMapView = (AIRGoogleMap *)mapView;
   [googleMapView didTapAtCoordinate:coordinate];
+}
+
+- (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate {
+  AIRGoogleMap *googleMapView = (AIRGoogleMap *)mapView;
+  [googleMapView didLongPressAtCoordinate:coordinate];
 }
 
 - (void)mapView:(GMSMapView *)mapView didChangeCameraPosition:(GMSCameraPosition *)position {

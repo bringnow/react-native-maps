@@ -21,6 +21,12 @@ id cameraPositionAsJSON(GMSCameraPosition *position) {
            };
 }
 
+@interface AIRGoogleMap ()
+
+- (id)eventFromCoordinate:(CLLocationCoordinate2D)coordinate;
+
+@end
+
 @implementation AIRGoogleMap
 {
   NSMutableArray<UIView *> *_reactSubviews;
@@ -35,6 +41,21 @@ id cameraPositionAsJSON(GMSCameraPosition *position) {
     _initialRegionSet = false;
   }
   return self;
+}
+- (id)eventFromCoordinate:(CLLocationCoordinate2D)coordinate {
+
+  CGPoint touchPoint = [self.projection pointForCoordinate:coordinate];
+
+  return @{
+           @"coordinate": @{
+               @"latitude": @(coordinate.latitude),
+               @"longitude": @(coordinate.longitude),
+               },
+           @"position": @{
+               @"x": @(touchPoint.x),
+               @"y": @(touchPoint.y),
+               },
+           };
 }
 
 #pragma clang diagnostic push
@@ -120,19 +141,12 @@ id cameraPositionAsJSON(GMSCameraPosition *position) {
 
 - (void)didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
   if (!self.onPress) return;
+  self.onPress([self eventFromCoordinate:coordinate]);
+}
 
-  CGPoint touchPoint = [self.projection pointForCoordinate:coordinate];
-
-  self.onPress(@{
-                @"coordinate": @{
-                    @"latitude": @(coordinate.latitude),
-                    @"longitude": @(coordinate.longitude),
-                    },
-                @"position": @{
-                    @"x": @(touchPoint.x),
-                    @"y": @(touchPoint.y),
-                    },
-                });
+- (void)didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate {
+  if (!self.onLongPress) return;
+  self.onLongPress([self eventFromCoordinate:coordinate]);
 }
 
 - (void)didChangeCameraPosition:(GMSCameraPosition *)position {
