@@ -106,6 +106,7 @@ class App extends React.Component {
         [ViewsAsMarkers, 'Arbitrary Views as Markers'],
         [EventListener, 'Events (incomplete)'],
         [MarkerTypes, 'Image Based Markers'],
+        [DraggableMarkers, 'Draggable Markers'],
         [Callouts, 'Custom Callouts'],
         [Overlays, 'Circles, Polygons, and Polylines (ios error)'],
         [DefaultMarkers, 'Default Markers'],

@@ -118,6 +118,21 @@ RCT_EXPORT_METHOD(fitToElements:(nonnull NSNumber *)reactTag
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker {
   AIRGMSMarker *aMarker = (AIRGMSMarker *)marker;
-  return [aMarker.fakeMarker didTapInfoWindowOfMarker:aMarker];
+  [aMarker.fakeMarker didTapInfoWindowOfMarker:aMarker];
+}
+
+- (void)mapView:(GMSMapView *)mapView didBeginDraggingMarker:(GMSMarker *)marker {
+  AIRGMSMarker *aMarker = (AIRGMSMarker *)marker;
+  [aMarker.fakeMarker didBeginDraggingMarker:aMarker];
+}
+
+- (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker {
+  AIRGMSMarker *aMarker = (AIRGMSMarker *)marker;
+  [aMarker.fakeMarker didEndDraggingMarker:aMarker];
+}
+
+- (void)mapView:(GMSMapView *)mapView didDragMarker:(GMSMarker *)marker {
+  AIRGMSMarker *aMarker = (AIRGMSMarker *)marker;
+  [aMarker.fakeMarker didDragMarker:aMarker];
 }
 @end

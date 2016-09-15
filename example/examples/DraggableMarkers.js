@@ -17,6 +17,10 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const SPACE = 0.01;
 
+function log(eventName, e) {
+  console.log(eventName, e.nativeEvent);
+}
+
 class MarkerTypes extends React.Component {
   constructor(props) {
     super(props);
@@ -48,22 +52,22 @@ class MarkerTypes extends React.Component {
         >
           <MapView.Marker
             coordinate={this.state.a}
-            onSelect={(e) => console.log('onSelect', e)}
-            onDrag={(e) => console.log('onDrag', e)}
-            onDragStart={(e) => console.log('onDragStart', e)}
-            onDragEnd={(e) => console.log('onDragEnd', e)}
-            onPress={(e) => console.log('onPress', e)}
+            onSelect={(e) => log('onSelect', e)}
+            onDrag={(e) => log('onDrag', e)}
+            onDragStart={(e) => log('onDragStart', e)}
+            onDragEnd={(e) => log('onDragEnd', e)}
+            onPress={(e) => log('onPress', e)}
             draggable
           >
             <PriceMarker amount={99} />
           </MapView.Marker>
           <MapView.Marker
             coordinate={this.state.b}
-            onSelect={(e) => console.log('onSelect', e)}
-            onDrag={(e) => console.log('onDrag', e)}
-            onDragStart={(e) => console.log('onDragStart', e)}
-            onDragEnd={(e) => console.log('onDragEnd', e)}
-            onPress={(e) => console.log('onPress', e)}
+            onSelect={(e) => log('onSelect', e)}
+            onDrag={(e) => log('onDrag', e)}
+            onDragStart={(e) => log('onDragStart', e)}
+            onDragEnd={(e) => log('onDragEnd', e)}
+            onPress={(e) => log('onPress', e)}
             draggable
           />
         </MapView>

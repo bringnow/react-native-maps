@@ -20,15 +20,21 @@
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, strong) AIRGMSMarker* realMarker;
 @property (nonatomic, copy) RCTBubblingEventBlock onPress;
+@property (nonatomic, copy) RCTDirectEventBlock onDragStart;
+@property (nonatomic, copy) RCTDirectEventBlock onDrag;
+@property (nonatomic, copy) RCTDirectEventBlock onDragEnd;
 @property (nonatomic, copy) NSString *imageSrc;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, strong) UIColor *pinColor;
+@property (nonatomic, assign) BOOL draggable;
 
 - (void)showCalloutView;
 - (void)hideCalloutView;
 - (UIView *)markerInfoContents;
 - (UIView *)markerInfoWindow;
 - (void)didTapInfoWindowOfMarker:(AIRGMSMarker *)marker;
-
+- (void)didBeginDraggingMarker:(AIRGMSMarker *)marker;
+- (void)didEndDraggingMarker:(AIRGMSMarker *)marker;
+- (void)didDragMarker:(AIRGMSMarker *)marker;
 @end

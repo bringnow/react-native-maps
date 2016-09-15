@@ -20,6 +20,10 @@ CGRect unionRect(CGRect a, CGRect b) {
                     MAX(a.size.height, b.size.height));
 }
 
+@interface AIRGoogleMapMarker ()
+- (id)eventFromMarker:(AIRGMSMarker*)marker;
+@end
+
 @implementation AIRGoogleMapMarker {
   RCTImageLoaderCancellationBlock _reloadImageCancellationBlock;
   __weak UIImageView *_iconImageView;
@@ -32,6 +36,24 @@ CGRect unionRect(CGRect a, CGRect b) {
     _realMarker.fakeMarker = self;
   }
   return self;
+}
+
+- (id)eventFromMarker:(AIRGMSMarker*)marker {
+
+  CLLocationCoordinate2D coordinate = marker.position;
+  CGPoint position = [self.realMarker.map.projection pointForCoordinate:coordinate];
+
+return @{
+         @"id": marker.identifier ?: @"unknown",
+         @"position": @{
+             @"x": @(position.x),
+             @"y": @(position.y),
+             },
+         @"coordinate": @{
+             @"latitude": @(coordinate.latitude),
+             @"longitude": @(coordinate.longitude),
+             }
+         };
 }
 
 - (void)insertReactSubview:(id<RCTComponent>)subview atIndex:(NSInteger)atIndex {
@@ -86,6 +108,21 @@ CGRect unionRect(CGRect a, CGRect b) {
                  };
     self.calloutView.onPress(event);
   }
+}
+
+- (void)didBeginDraggingMarker:(AIRGMSMarker *)marker {
+  if (!self.onDragStart) return;
+  self.onDragStart([self eventFromMarker:marker]);
+}
+
+- (void)didEndDraggingMarker:(AIRGMSMarker *)marker {
+  if (!self.onDragEnd) return;
+  self.onDragEnd([self eventFromMarker:marker]);
+}
+
+- (void)didDragMarker:(AIRGMSMarker *)marker {
+  if (!self.onDrag) return;
+  self.onDrag([self eventFromMarker:marker]);
 }
 
 - (void)setCoordinate:(CLLocationCoordinate2D)coordinate {
@@ -189,6 +226,14 @@ CGRect unionRect(CGRect a, CGRect b) {
 - (void)setPinColor:(UIColor *)pinColor {
   _pinColor = pinColor;
   _realMarker.icon = [GMSMarker markerImageWithColor:pinColor];
+}
+
+- (void)setDraggable:(BOOL)draggable {
+  _realMarker.draggable = draggable;
+}
+
+- (BOOL)draggable {
+  return _realMarker.draggable;
 }
 
 @end
