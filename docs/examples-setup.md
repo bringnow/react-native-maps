@@ -18,4 +18,5 @@
 
 2. Install via gradle:
 
-     ./example/android/gradlew installDebug
+    cd example/android
+    ./gradlew installDebug
