@@ -242,6 +242,8 @@ const propTypes = {
    */
   legalLabelInsets: EdgeInsetsPropType,
 
+  onReady: PropTypes.func,
+
   /**
    * Callback that is called continuously when the user is dragging the map.
    */
@@ -355,6 +357,9 @@ class MapView extends React.Component {
       this.map.setNativeProps({ region: initialRegion });
     }
     this.setState({ isReady: true });
+    if (this.props.onReady) {
+      this.props.onReady();
+    }
   }
 
   _onLayout(e) {
