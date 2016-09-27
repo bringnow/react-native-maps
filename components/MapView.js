@@ -345,12 +345,12 @@ const propTypes = {
   /**
    * TODO
    */
-  onMapReady: PropTypes.func,
+  onReady: PropTypes.func,
 
   /**
    * TODO
    */
-  onMapLoaded: PropTypes.func,
+  onLoaded: PropTypes.func,
 };
 
 class MapView extends React.Component {
@@ -409,6 +409,7 @@ class MapView extends React.Component {
   }
 
   _onMapLoaded() {
+    console.log('_onMapLoaded');
     this.setState({ isMapLoaded: true });
     if (this.props.onLoaded) {
       this.props.onLoaded();
