@@ -410,8 +410,8 @@ class MapView extends React.Component {
 
   _onMapLoaded() {
     this.setState({ isMapLoaded: true });
-    if (this.props.onMapLoaded) {
-      this.props.onMapLoaded();
+    if (this.props.onLoaded) {
+      this.props.onLoaded();
     }
   }
 
