@@ -214,6 +214,8 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
             @Override public void onMapLoaded() {
                 isMapLoaded = true;
                 AirMapView.this.cacheView();
+
+                manager.pushEvent(this, "onMapLoaded", new WritableNativeMap());
             }
         });
 

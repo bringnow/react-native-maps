@@ -342,6 +342,15 @@ const propTypes = {
    */
   onMarkerDragEnd: PropTypes.func,
 
+  /**
+   * TODO
+   */
+  onMapReady: PropTypes.func,
+
+  /**
+   * TODO
+   */
+  onMapLoaded: PropTypes.func,
 };
 
 class MapView extends React.Component {
@@ -350,9 +359,11 @@ class MapView extends React.Component {
 
     this.state = {
       isReady: Platform.OS === 'ios',
+      isMapLoaded: Platform.OS === 'ios',
     };
 
     this._onMapReady = this._onMapReady.bind(this);
+    this._onMapLoaded = this._onMapLoaded.bind(this);
     this._onChange = this._onChange.bind(this);
     this._onLayout = this._onLayout.bind(this);
   }
@@ -392,6 +403,16 @@ class MapView extends React.Component {
       this.map.setNativeProps({ region: initialRegion });
     }
     this.setState({ isReady: true });
+    if (this.props.onReady) {
+      this.props.onReady();
+    }
+  }
+
+  _onMapLoaded() {
+    this.setState({ isMapLoaded: true });
+    if (this.props.onMapLoaded) {
+      this.props.onMapLoaded();
+    }
   }
 
   _onLayout(e) {
@@ -491,6 +512,7 @@ class MapView extends React.Component {
         initialRegion: null,
         onChange: this._onChange,
         onMapReady: this._onMapReady,
+        onMapLoaded: this._onMapLoaded,
         onLayout: this._onLayout,
       };
       if (Platform.OS === 'ios' && ANDROID_ONLY_MAP_TYPES.includes(props.mapType)) {
@@ -504,6 +526,7 @@ class MapView extends React.Component {
         initialRegion: null,
         onChange: this._onChange,
         onMapReady: this._onMapReady,
+        onMapLoaded: this._onMapLoaded,
         onLayout: this._onLayout,
       };
     }
@@ -538,6 +561,7 @@ const nativeComponent = Component => requireNativeComponent(Component, MapView, 
   nativeOnly: {
     onChange: true,
     onMapReady: true,
+    onMapLoaded: true,
     handlePanDrag: true,
   },
 });
@@ -557,6 +581,7 @@ const AIRMapLite = NativeModules.UIManager.AIRMapLite &&
     nativeOnly: {
       onChange: true,
       onMapReady: true,
+      onMapLoaded: true,
       handlePanDrag: true,
     },
   });
